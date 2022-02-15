@@ -24,9 +24,8 @@ void mulByCofactorBLS12fast(T& Q, const T& P);
 #include <vector>
 #endif
 
-#ifdef MCL_USE_OMP
+
 #include <omp.h>
-#endif
 
 /*
 	set bit size of Fp and Fr
@@ -2058,7 +2057,7 @@ inline void millerLoopVecMT(Fp12& f, const G1* Pvec, const G2* Qvec, size_t n, s
 		f = 1;
 		return;
 	}
-#ifdef MCL_USE_OMP
+
 	const size_t minN = 16;
 	if (cpuN == 0) {
 		cpuN = omp_get_num_procs();
@@ -2084,10 +2083,6 @@ inline void millerLoopVecMT(Fp12& f, const G1* Pvec, const G2* Qvec, size_t n, s
 	for (size_t i = 0; i < cpuN; i++) {
 		f *= fs[i];
 	}
-#else
-	(void)cpuN;
-	millerLoopVec(f, Pvec, Qvec, n);
-#endif
 }
 
 inline bool setMapToMode(int mode)

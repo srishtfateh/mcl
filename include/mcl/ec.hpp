@@ -15,9 +15,9 @@
 	#pragma warning(push)
 	#pragma warning(disable : 4458)
 #endif
-#ifdef MCL_USE_OMP
+
 #include <omp.h>
-#endif
+
 
 namespace mcl {
 
@@ -1628,7 +1628,6 @@ public:
 	template<class tag, size_t maxBitSize, template<class _tag, size_t _maxBitSize>class FpT>
 	static inline void mulVecMT(EcT& z, const EcT *xVec, const FpT<tag, maxBitSize> *yVec, size_t n, size_t cpuN = 0)
 	{
-#ifdef MCL_USE_OMP
 	const size_t minN = mcl::fp::maxMulVecN;
 	if (cpuN == 0) {
 		cpuN = omp_get_num_procs();
@@ -1654,10 +1653,6 @@ public:
 	for (size_t i = 0; i < cpuN; i++) {
 		z += zs[i];
 	}
-#else
-		(void)cpuN;
-		mulVec(z, xVec, yVec, n);
-#endif
 	}
 #ifndef CYBOZU_DONT_USE_EXCEPTION
 	static inline void init(const std::string& astr, const std::string& bstr, int mode = ec::Jacobi)
