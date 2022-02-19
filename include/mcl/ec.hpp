@@ -1639,6 +1639,10 @@ public:
 //		mulVec(z, xVec, yVec, n);
 //		return;
         cpuN = n-1;
+        if(n == 1){
+            mulVec(z, xVec, yVec, n);
+		    return;
+        }
 	}
 	EcT *zs = (EcT*)CYBOZU_ALLOCA(sizeof(EcT) * cpuN);
 	size_t q = n / cpuN;
