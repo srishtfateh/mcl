@@ -2066,8 +2066,9 @@ inline void millerLoopVecMT(Fp12& f, const G1* Pvec, const G2* Qvec, size_t n, s
 		}
 	}
 	if (cpuN <= 1 || n <= cpuN) {
-		millerLoopVec(f, Pvec, Qvec, n);
-		return;
+//		millerLoopVec(f, Pvec, Qvec, n);
+//		return;
+        cpuN = n-1;
 	}
 	Fp12 *fs = (Fp12*)CYBOZU_ALLOCA(sizeof(Fp12) * cpuN);
 	size_t q = n / cpuN;

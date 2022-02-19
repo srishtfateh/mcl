@@ -1636,8 +1636,9 @@ public:
 		}
 	}
 	if (cpuN <= 1 || n <= cpuN) {
-		mulVec(z, xVec, yVec, n);
-		return;
+//		mulVec(z, xVec, yVec, n);
+//		return;
+        cpuN = n-1;
 	}
 	EcT *zs = (EcT*)CYBOZU_ALLOCA(sizeof(EcT) * cpuN);
 	size_t q = n / cpuN;
